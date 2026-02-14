@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>enqweezy</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --glass: rgba(255,255,255,0.12);
+  --glass-strong: rgba(255,255,255,0.2);
+  --border: rgba(255,255,255,0.35);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background: radial-gradient(circle at top,#1c2c3d,#070a10);
+  color:#fff;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  overflow-x:hidden;
+}
+
+/* ===== BACKGROUND FLOATING ICONS ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+}
+
+.float{
+  position:absolute;
+  opacity:.14;
+  animation:float linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(120vh) rotate(0deg)}
+  to{transform:translateY(-160vh) rotate(360deg)}
+}
+
+/* ===== LANGUAGE SWITCH ===== */
+.lang{
+  position:fixed;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:6px;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:6px;
+}
+
+.lang button{
+  background:none;
+  border:none;
+  color:white;
+  padding:6px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.lang button.active{
+  background:var(--glass-strong);
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:120px auto;
+  padding:40px;
+  background:var(--glass);
+  backdrop-filter:blur(26px);
+  border:1px solid var(--border);
+  border-radius:30px;
+  box-shadow:0 30px 90px rgba(0,0,0,.55);
+}
+
+/* ===== AVATAR + NICK ===== */
+.avatar-wrap{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.avatar{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.4);
+  object-fit:cover;
+}
+
+.nick{
+  margin-top:14px;
+  font-family:'Orbitron',sans-serif;
+  font-size:40px;
+  font-weight:700;
+  background:linear-gradient(90deg,#ff00cc,#00ffff,#7fff00,#ff00cc);
+  background-size:300% 300%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:rgb 6s linear infinite;
+}
+
+@keyframes rgb{
+  0%{background-position:0% 50%}
+  100%{background-position:100% 50%}
+}
+
+/* ===== MENU ===== */
+.menu{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.menu button{
+  background:var(--glass-strong);
+  border:1px solid var(--border);
+  padding:14px 22px;
+  border-radius:18px;
+  color:white;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.menu button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 22px rgba(255,255,255,.3);
+}
+
+/* ===== CONTENT ===== */
+.content{
+  display:none;
+  margin-top:30px;
+  padding:30px;
+  background:var(--glass);
+  backdrop-filter:blur(22px);
+  border:1px solid var(--border);
+  border-radius:26px;
+  animation:open .35s ease;
+}
+
+@keyframes open{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:none}
+}
+
+pre{
+  white-space:pre-wrap;
+  line-height:1.6;
+  margin:0;
+}
+
+/* ===== DEVICES ===== */
+.device{
+  display:block;
+  margin-bottom:12px;
+  padding:14px 18px;
+  background:rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:16px;
+  color:white;
+  text-decoration:none;
+  transition:.25s;
+}
+
+.device:hover{
+  background:rgba(255,255,255,0.22);
+  box-shadow:0 0 24px rgba(255,255,255,.35);
+  transform:translateY(-2px);
+}
+
+.device span{
+  opacity:.7;
+  font-size:14px;
+}
+
+/* ===== SOCIALS ===== */
+.socials{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.socials a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 18px;
+  background:var(--glass-strong);
+  border:1px solid var(--border);
+  border-radius:18px;
+  color:white;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.socials a:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 26px rgba(255,255,255,.35);
+}
+
+.socials img{
+  width:26px;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.35));
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  margin-top:40px;
+  text-align:center;
+  font-size:14px;
+  opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== FLOATING ICONS ===== -->
+<div class="bg">
+<script>
+const icons=[
+"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg",
+"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg",
+"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg",
+"https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+"https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg",
+"https://upload.wikimedia.org/wikipedia/commons/2/2b/Kali-dragon-icon.svg",
+"https://upload.wikimedia.org/wikipedia/commons/d/df/Wireshark_icon.svg"
+];
+
+for(let i=0;i<18;i++){
+  const img=document.createElement("img");
+  img.src=icons[i%icons.length];
+  img.className="float";
+  img.style.left=Math.random()*100+"%";
+  img.style.width=50+Math.random()*40+"px";
+  img.style.animationDuration=35+Math.random()*30+"s";
+  document.currentScript.parentElement.appendChild(img);
+}
+</script>
+</div>
+
+<!-- ===== LANGUAGE ===== -->
+<div class="lang">
+<button id="ru">RU</button>
+<button id="en">EN</button>
+</div>
+
+<div class="container">
+
+<div class="avatar-wrap">
+<img class="avatar" src="avatar.jpg">
+<div class="nick">@enqweezy</div>
+</div>
+
+<div class="menu">
+<button onclick="show('about')" id="b1"></button>
+<button onclick="show('devices')" id="b2"></button>
+<button onclick="show('socials')" id="b3"></button>
+</div>
+
+<div id="about" class="content"><pre id="aboutText"></pre></div>
+<div id="devices" class="content" id="devicesBox"></div>
+
+<div id="socials" class="content">
+<div class="socials">
+<a href="https://t.me/send?start=IVk8tTqV9SLj" target="_blank">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">Donations
+</a>
+<a href="https://t.me/bolshayajirnayajopa" target="_blank">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">Telegram Channel
+</a>
+<a href="https://www.tiktok.com/@enqweezy1337?lang=ru-RU" target="_blank">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">TikTok
+</a>
+</div>
+</div>
+
+<div class="footer">This is the end of Enqweezy biography</div>
+
+</div>
+
+<script>
+const data={
+en:{
+b:["About me","Devices","My socials"],
+about:`A short bio of the person behind the username @enqweezy
+
+17 y.o. | January 11
+ENFJ-A
+
+Briefly about me:
+I’m curious and practical, always exploring technology and figuring out how things work.
+I’m into photography, music, electronics, computers, coding, and I’m a tech reseller.
+Friendly but focused, I enjoy meaningful conversations and learning new things.`,
+devices:[
+{name:"Alienware 17 R2",desc:"i7 4720HQ | GTX 980M 8Gb",link:"https://www.google.com/search?q=Alienware+17+R2&tbm=isch"},
+{name:"Xiaomi Air 13.3",desc:"i5 6200U | GT940MX 1Gb",link:"https://www.google.com/search?q=Xiaomi+Air+13.3+i5+6200U&tbm=isch"},
+{name:"iPhone 15 Pro",desc:"256GB",link:"https://www.google.com/search?q=iPhone+15+Pro&tbm=isch"},
+{name:"iPhone 6s x2",desc:"16GB",link:"https://www.google.com/search?q=iPhone+6s&tbm=isch"},
+{name:"Sony WH-1000XM4",desc:"Headphones",link:"https://www.google.com/search?q=Sony+WH-1000XM4&tbm=isch"},
+{name:"MoonDrop Space Travel",desc:"TWS",link:"https://www.google.com/search?q=MoonDrop+Space+Travel&tbm=isch"},
+{name:"Samsung Galaxy Watch 4 Classic",desc:"Smart Watch",link:"https://www.google.com/search?q=Samsung+Galaxy+Watch+4+Classic&tbm=isch"}
+]
+},
+ru:{
+b:["Обо мне","Девайсы","Мои соцсети"],
+about:`Короткая биография человека за никнеймом @enqweezy
+
+17 лет | 11 января
+ENFJ-A
+
+Коротко обо мне:
+Я любознательный и практичный человек, постоянно изучаю технологии и разбираюсь, как всё устроено.
+Увлекаюсь фотографией, музыкой, электроникой, компьютерами, программированием и занимаюсь перепродажей техники.
+Дружелюбный, но собранный, люблю содержательные разговоры и всегда открыт к новым знаниям.`,
+devices:[
+{name:"Alienware 17 R2",desc:"i7 4720HQ | GTX 980M 8Gb",link:"https://www.google.com/search?q=Alienware+17+R2&tbm=isch"},
+{name:"Xiaomi Air 13.3",desc:"i5 6200U | GT940MX 1Gb",link:"https://www.google.com/search?q=Xiaomi+Air+13.3+i5+6200U&tbm=isch"},
+{name:"iPhone 15 Pro",desc:"256GB",link:"https://www.google.com/search?q=iPhone+15+Pro&tbm=isch"},
+{name:"iPhone 6s x2",desc:"16GB",link:"https://www.google.com/search?q=iPhone+6s&tbm=isch"},
+{name:"Sony WH-1000XM4",desc:"Наушники",link:"https://www.google.com/search?q=Sony+WH-1000XM4&tbm=isch"},
+{name:"MoonDrop Space Travel",desc:"TWS",link:"https://www.google.com/search?q=MoonDrop+Space+Travel&tbm=isch"},
+{name:"Samsung Galaxy Watch 4 Classic",desc:"Смарт-часы",link:"https://www.google.com/search?q=Samsung+Galaxy+Watch+4+Classic&tbm=isch"}
+]
+}
+};
+
+function setLang(l){
+localStorage.setItem("lang",l);
+b1.textContent=data[l].b[0];
+b2.textContent=data[l].b[1];
+b3.textContent=data[l].b[2];
+aboutText.textContent=data[l].about;
+
+const box=document.getElementById("devices");
+box.innerHTML="";
+data[l].devices.forEach(d=>{
+box.innerHTML+=`
+<a class="device" href="${d.link}" target="_blank">
+<strong>${d.name}</strong><br>
+<span>${d.desc}</span>
+</a>`;
+});
+
+document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
+document.getElementById(l).classList.add("active");
+}
+
+function show(id){
+document.querySelectorAll(".content").forEach(c=>c.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+setLang(localStorage.getItem("lang")||"en");
+
+document.getElementById("en").addEventListener("click", () => setLang("en"));
+document.getElementById("ru").addEventListener("click", () => setLang("ru"));
+</script>
+</script>
+
+</body>
+</html>
