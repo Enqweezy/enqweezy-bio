@@ -362,10 +362,13 @@ b2.onclick=()=>show("devices");
 b3.onclick=()=>show("socials");
 
 setLang(localStorage.getItem("lang")||"en");
+document.getElementById("en").onclick = () => setLang("en");
+document.getElementById("ru").onclick = () => setLang("ru");
 </script>
 
 </body>
 </html>
+
 
 
 
