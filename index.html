@@ -20,11 +20,17 @@
 body{
   margin:0;
   min-height:100vh;
+  display:flex;
+  flex-direction:column;
   background: radial-gradient(circle at top,#1c2c3d,#070a10);
   color:#fff;
   font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
   overflow-x:hidden;
 }
+.container{
+  flex:1;
+}
+
 
 /* ===== BACKGROUND FLOATING ICONS ===== */
 .bg{
@@ -32,6 +38,7 @@ body{
   inset:0;
   z-index:-1;
   overflow:hidden;
+  pointer-events:none;
 }
 
 .float{
@@ -41,9 +48,14 @@ body{
 }
 
 @keyframes float{
-  from{transform:translateY(120vh) rotate(0deg)}
-  to{transform:translateY(-160vh) rotate(360deg)}
+  0%{
+    transform:translateY(120vh) rotate(0deg);
+  }
+  100%{
+    transform:translateY(-120vh) rotate(360deg);
+  }
 }
+
 
 /* ===== LANGUAGE SWITCH ===== */
 .lang{
@@ -217,11 +229,13 @@ pre{
 
 /* ===== FOOTER ===== */
 .footer{
-  margin-top:40px;
+  margin-top:auto;
+  padding:30px 0;
   text-align:center;
   font-size:14px;
   opacity:.6;
 }
+
 </style>
 </head>
 
@@ -240,15 +254,17 @@ const icons=[
 "https://upload.wikimedia.org/wikipedia/commons/d/df/Wireshark_icon.svg"
 ];
 
-for(let i=0;i<18;i++){
+for(let i=0;i<20;i++){
   const img=document.createElement("img");
   img.src=icons[i%icons.length];
   img.className="float";
   img.style.left=Math.random()*100+"%";
-  img.style.width=50+Math.random()*40+"px";
-  img.style.animationDuration=35+Math.random()*30+"s";
-  document.currentScript.parentElement.appendChild(img);
+  img.style.width=40+Math.random()*50+"px";
+  img.style.animationDuration=30+Math.random()*40+"s";
+  img.style.animationDelay=-(Math.random()*60)+"s";
+  document.querySelector(".bg").appendChild(img);
 }
+
 </script>
 </div>
 
