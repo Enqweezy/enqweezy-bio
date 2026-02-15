@@ -36,7 +36,14 @@ body{
 .bg{
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index:0;
+}
+.container,
+.lang{
+  position:relative;
+  z-index:1;
+}
+
   overflow:hidden;
   pointer-events:none;
 }
@@ -389,4 +396,5 @@ document.getElementById("ru").addEventListener("click", () => setLang("ru"));
 
 </body>
 </html>
+
 
