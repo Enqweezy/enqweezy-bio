@@ -5,64 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>enqweezy</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --glass: rgba(255,255,255,0.12);
-  --glass-strong: rgba(255,255,255,0.2);
+  --glass-strong: rgba(255,255,255,0.22);
   --border: rgba(255,255,255,0.35);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-  margin:0;
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
   background: radial-gradient(circle at top,#1c2c3d,#070a10);
   color:#fff;
   font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
   overflow-x:hidden;
 }
-.container{
-  flex:1;
-}
 
-
-/* ===== BACKGROUND FLOATING ICONS ===== */
+/* ===== FLOATING BACKGROUND ===== */
 .bg{
   position:fixed;
   inset:0;
   z-index:0;
-}
-.container,
-.lang{
-  position:relative;
-  z-index:1;
-}
-
-  overflow:hidden;
   pointer-events:none;
+  overflow:hidden;
 }
 
 .float{
   position:absolute;
-  opacity:.14;
-  animation:float linear infinite;
+  opacity:.22;
+  animation: float linear infinite;
 }
 
 @keyframes float{
-  0%{
-    transform:translateY(120vh) rotate(0deg);
+  from{
+    transform: translateY(120vh) rotate(0deg);
   }
-  100%{
-    transform:translateY(-120vh) rotate(360deg);
+  to{
+    transform: translateY(-120vh) rotate(360deg);
   }
 }
-
 
 /* ===== LANGUAGE SWITCH ===== */
 .lang{
@@ -76,6 +64,7 @@ body{
   border:1px solid var(--border);
   border-radius:14px;
   padding:6px;
+  z-index:2;
 }
 
 .lang button{
@@ -91,8 +80,10 @@ body{
   background:var(--glass-strong);
 }
 
-/* ===== MAIN CONTAINER ===== */
+/* ===== MAIN CARD ===== */
 .container{
+  position:relative;
+  z-index:1;
   max-width:900px;
   margin:120px auto;
   padding:40px;
@@ -103,7 +94,7 @@ body{
   box-shadow:0 30px 90px rgba(0,0,0,.55);
 }
 
-/* ===== AVATAR + NICK ===== */
+/* ===== AVATAR ===== */
 .avatar-wrap{
   text-align:center;
   margin-bottom:30px;
@@ -126,12 +117,12 @@ body{
   background-size:300% 300%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:rgb 6s linear infinite;
+  animation: rgb 6s linear infinite;
 }
 
 @keyframes rgb{
-  0%{background-position:0% 50%}
-  100%{background-position:100% 50%}
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
 }
 
 /* ===== MENU ===== */
@@ -166,7 +157,7 @@ body{
   backdrop-filter:blur(22px);
   border:1px solid var(--border);
   border-radius:26px;
-  animation:open .35s ease;
+  animation: open .35s ease;
 }
 
 @keyframes open{
@@ -177,7 +168,6 @@ body{
 pre{
   white-space:pre-wrap;
   line-height:1.6;
-  margin:0;
 }
 
 /* ===== DEVICES ===== */
@@ -236,165 +226,146 @@ pre{
 
 /* ===== FOOTER ===== */
 .footer{
-  margin-top:auto;
-  padding:30px 0;
+  margin-top:40px;
   text-align:center;
   font-size:14px;
   opacity:.6;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ===== FLOATING ICONS ===== -->
-<div class="bg">
-<script>
-const icons=[
-"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg",
-"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg",
-"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg",
-"https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
-"https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg",
-"https://upload.wikimedia.org/wikipedia/commons/2/2b/Kali-dragon-icon.svg",
-"https://upload.wikimedia.org/wikipedia/commons/d/df/Wireshark_icon.svg"
-];
+<div class="bg" id="bg"></div>
 
-for(let i=0;i<20;i++){
-  const img=document.createElement("img");
-  img.src=icons[i%icons.length];
-  img.className="float";
-  img.style.left=Math.random()*100+"%";
-  img.style.width=40+Math.random()*50+"px";
-  img.style.animationDuration=30+Math.random()*40+"s";
-  img.style.animationDelay=-(Math.random()*60)+"s";
-  document.querySelector(".bg").appendChild(img);
-}
-
-</script>
-</div>
-
-<!-- ===== LANGUAGE ===== -->
 <div class="lang">
-<button id="ru">RU</button>
-<button id="en">EN</button>
+  <button id="ru">RU</button>
+  <button id="en">EN</button>
 </div>
 
 <div class="container">
 
-<div class="avatar-wrap">
-<img class="avatar" src="avatar.jpg">
-<div class="nick">@enqweezy</div>
-</div>
+  <div class="avatar-wrap">
+    <img class="avatar" src="avatar.jpg" alt="">
+    <div class="nick">@enqweezy</div>
+  </div>
 
-<div class="menu">
-<button onclick="show('about')" id="b1"></button>
-<button onclick="show('devices')" id="b2"></button>
-<button onclick="show('socials')" id="b3"></button>
-</div>
+  <div class="menu">
+    <button id="b1"></button>
+    <button id="b2"></button>
+    <button id="b3"></button>
+  </div>
 
-<div id="about" class="content"><pre id="aboutText"></pre></div>
-<div id="devices" class="content" id="devicesBox"></div>
+  <div id="about" class="content"><pre id="aboutText"></pre></div>
+  <div id="devices" class="content"></div>
 
-<div id="socials" class="content">
-<div class="socials">
-<a href="https://t.me/send?start=IVk8tTqV9SLj" target="_blank">
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">Donations
-</a>
-<a href="https://t.me/bolshayajirnayajopa" target="_blank">
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">Telegram Channel
-</a>
-<a href="https://www.tiktok.com/@enqweezy1337?lang=ru-RU" target="_blank">
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">TikTok
-</a>
-</div>
-</div>
+  <div id="socials" class="content">
+    <div class="socials">
+      <a href="https://t.me/send?start=IVk8tTqV9SLj" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">Donations
+      </a>
+      <a href="https://t.me/bolshayajirnayajopa" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">Telegram
+      </a>
+      <a href="https://www.tiktok.com/@enqweezy1337" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">TikTok
+      </a>
+    </div>
+  </div>
 
-<div class="footer">This is the end of Enqweezy biography</div>
-
+  <div class="footer">This is the end of Enqweezy biography</div>
 </div>
 
 <script>
-const data={
-en:{
-b:["About me","Devices","My socials"],
-about:`A short bio of the person behind the username @enqweezy
+/* ===== FLOATING ICONS ===== */
+const icons=[
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg"
+];
 
-17 y.o. | January 11
-ENFJ-A
-
-Briefly about me:
-I’m curious and practical, always exploring technology and figuring out how things work.
-I’m into photography, music, electronics, computers, coding, and I’m a tech reseller.
-Friendly but focused, I enjoy meaningful conversations and learning new things.`,
-devices:[
-{name:"Alienware 17 R2",desc:"i7 4720HQ | GTX 980M 8Gb",link:"https://www.google.com/search?q=Alienware+17+R2&tbm=isch"},
-{name:"Xiaomi Air 13.3",desc:"i5 6200U | GT940MX 1Gb",link:"https://www.google.com/search?q=Xiaomi+Air+13.3+i5+6200U&tbm=isch"},
-{name:"Samsung Galaxy S24 Ultra",desc:"256GB",link:"https://www.google.com/search?q=s24+ultra+yellow&sca_esv=facff6a1d5eeb21c&udm=2&biw=2560&bih=959&sxsrf=ANbL-n56ZnvqE1T6Ol3uZbxHRUddN5yW4g%3A1771157442603&ei=wreRady-JMzKp84PvqeY4Ag&ved=0ahUKEwjcp9TRu9uSAxVM5ckDHb4TBowQ4dUDCBU&uact=5&oq=s24+ultra+yellow&gs_lp=Egtnd3Mtd2l6LWltZyIQczI0IHVsdHJhIHllbGxvdzIFEAAYgAQyBRAAGIAEMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeSIUvUJ4JWIUucAF4AJABAJgB3wGgAdgIqgEDMi01uAEDyAEA-AEBmAIGoAL4CMICBxAjGMkCGCfCAgYQABgHGB7CAg0QABiABBiKBRhDGLEDwgIKEAAYgAQYigUYQ5gDAIgGAZIHBTEuMC41oAfmGbIHAzItNbgH8wjCBwMyLTbIBxmACAE&sclient=gws-wiz-img"},
-{name:"iPhone 6s x2",desc:"16GB",link:"https://www.google.com/search?q=iPhone+6s&tbm=isch"},
-{name:"Sony WH-1000XM4",desc:"Headphones",link:"https://www.google.com/search?q=Sony+WH-1000XM4&tbm=isch"},
-{name:"MoonDrop Space Travel",desc:"TWS",link:"https://www.google.com/search?q=MoonDrop+Space+Travel&tbm=isch"},
-{name:"Samsung Galaxy Watch 4 Classic",desc:"Smart Watch",link:"https://www.google.com/search?q=Samsung+Galaxy+Watch+4+Classic&tbm=isch"}
-]
-},
-ru:{
-b:["Обо мне","Девайсы","Мои соцсети"],
-about:`Короткая биография человека за никнеймом @enqweezy
-
-17 лет | 11 января
-ENFJ-A
-
-Коротко обо мне:
-Я любознательный и практичный человек, постоянно изучаю технологии и разбираюсь, как всё устроено.
-Увлекаюсь фотографией, музыкой, электроникой, компьютерами, программированием и занимаюсь перепродажей техники.
-Дружелюбный, но собранный, люблю содержательные разговоры и всегда открыт к новым знаниям.`,
-devices:[
-{name:"Alienware 17 R2",desc:"i7 4720HQ | GTX 980M 8Gb",link:"https://www.google.com/search?q=Alienware+17+R2&tbm=isch"},
-{name:"Xiaomi Air 13.3",desc:"i5 6200U | GT940MX 1Gb",link:"https://www.google.com/search?q=Xiaomi+Air+13.3+i5+6200U&tbm=isch"},
-{name:"Samsung Galaxy S24 Ultra",desc:"256GB",link:"https://www.google.com/search?q=s24+ultra+yellow&sca_esv=facff6a1d5eeb21c&udm=2&biw=2560&bih=959&sxsrf=ANbL-n56ZnvqE1T6Ol3uZbxHRUddN5yW4g%3A1771157442603&ei=wreRady-JMzKp84PvqeY4Ag&ved=0ahUKEwjcp9TRu9uSAxVM5ckDHb4TBowQ4dUDCBU&uact=5&oq=s24+ultra+yellow&gs_lp=Egtnd3Mtd2l6LWltZyIQczI0IHVsdHJhIHllbGxvdzIFEAAYgAQyBRAAGIAEMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeMgQQABgeSIUvUJ4JWIUucAF4AJABAJgB3wGgAdgIqgEDMi01uAEDyAEA-AEBmAIGoAL4CMICBxAjGMkCGCfCAgYQABgHGB7CAg0QABiABBiKBRhDGLEDwgIKEAAYgAQYigUYQ5gDAIgGAZIHBTEuMC41oAfmGbIHAzItNbgH8wjCBwMyLTbIBxmACAE&sclient=gws-wiz-img"},
-{name:"iPhone 6s x2",desc:"16GB",link:"https://www.google.com/search?q=iPhone+6s&tbm=isch"},
-{name:"Sony WH-1000XM4",desc:"Наушники",link:"https://www.google.com/search?q=Sony+WH-1000XM4&tbm=isch"},
-{name:"MoonDrop Space Travel",desc:"TWS",link:"https://www.google.com/search?q=MoonDrop+Space+Travel&tbm=isch"},
-{name:"Samsung Galaxy Watch 4 Classic",desc:"Смарт-часы",link:"https://www.google.com/search?q=Samsung+Galaxy+Watch+4+Classic&tbm=isch"}
-]
+for(let i=0;i<25;i++){
+  const img=document.createElement("img");
+  img.src=icons[i%icons.length];
+  img.className="float";
+  img.style.left=Math.random()*100+"%";
+  img.style.top=Math.random()*100+"%";
+  img.style.width=30+Math.random()*50+"px";
+  img.style.animationDuration=25+Math.random()*40+"s";
+  img.style.animationDelay=-(Math.random()*60)+"s";
+  document.getElementById("bg").appendChild(img);
 }
+
+/* ===== CONTENT DATA ===== */
+const data={
+  en:{
+    b:["About me","Devices","My socials"],
+    about:`17 y.o. | January 11
+ENFJ-A
+
+Curious, practical, tech-focused.
+Photography, electronics, computers, coding.
+Tech reseller and lifelong learner.`,
+    devices:[
+      {name:"Alienware 17 R2",desc:"i7 | GTX 980M"},
+      {name:"Xiaomi Air 13.3",desc:"i5 | 940MX"},
+      {name:"Galaxy S24 Ultra",desc:"256GB"},
+      {name:"Sony WH-1000XM4",desc:"Headphones"}
+    ]
+  },
+  ru:{
+    b:["Обо мне","Девайсы","Соцсети"],
+    about:`17 лет | 11 января
+ENFJ-A
+
+Любознательный и практичный.
+Фото, электроника, компьютеры, кодинг.
+Перепродажа техники.`,
+    devices:[
+      {name:"Alienware 17 R2",desc:"i7 | GTX 980M"},
+      {name:"Xiaomi Air 13.3",desc:"i5 | 940MX"},
+      {name:"Galaxy S24 Ultra",desc:"256GB"},
+      {name:"Sony WH-1000XM4",desc:"Наушники"}
+    ]
+  }
 };
 
 function setLang(l){
-localStorage.setItem("lang",l);
-b1.textContent=data[l].b[0];
-b2.textContent=data[l].b[1];
-b3.textContent=data[l].b[2];
-aboutText.textContent=data[l].about;
+  localStorage.setItem("lang",l);
+  b1.textContent=data[l].b[0];
+  b2.textContent=data[l].b[1];
+  b3.textContent=data[l].b[2];
+  aboutText.textContent=data[l].about;
 
-const box=document.getElementById("devices");
-box.innerHTML="";
-data[l].devices.forEach(d=>{
-box.innerHTML+=`
-<a class="device" href="${d.link}" target="_blank">
-<strong>${d.name}</strong><br>
-<span>${d.desc}</span>
-</a>`;
-});
+  devices.innerHTML="";
+  data[l].devices.forEach(d=>{
+    devices.innerHTML+=`
+      <div class="device">
+        <strong>${d.name}</strong><br>
+        <span>${d.desc}</span>
+      </div>`;
+  });
 
-document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
-document.getElementById(l).classList.add("active");
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
+  document.getElementById(l).classList.add("active");
 }
 
 function show(id){
-document.querySelectorAll(".content").forEach(c=>c.style.display="none");
-document.getElementById(id).style.display="block";
+  document.querySelectorAll(".content").forEach(c=>c.style.display="none");
+  document.getElementById(id).style.display="block";
 }
 
-setLang(localStorage.getItem("lang")||"en");
+b1.onclick=()=>show("about");
+b2.onclick=()=>show("devices");
+b3.onclick=()=>show("socials");
 
-document.getElementById("en").addEventListener("click", () => setLang("en"));
-document.getElementById("ru").addEventListener("click", () => setLang("ru"));
-</script>
+setLang(localStorage.getItem("lang")||"en");
 </script>
 
 </body>
 </html>
+
 
 
